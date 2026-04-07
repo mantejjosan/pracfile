@@ -1,24 +1,74 @@
-# What this is?
-This is a template for creating college practical style formatted files.
-You write you python code in jupyter notebooks and the `build.sh` script converts it into a combined pdf file containing all the jupyter notebooks. 
+# AI Practicals Formatting Workflow
+## 📘 What is this?
 
-Pros: One person from your class can once create the format in typst (a simpler alternative to latex which equally powerful) and you just keep writing in jupyter notebooks. 
+This repository provides a **template for generating college-style practical files** in a clean and structured format.
 
+You write your code in **Jupyter notebooks**, and the `build.sh` script automatically converts and compiles them into a **single, well-formatted PDF** containing all your practicals.
 
-# Convention
-1. Naming: Name your practicals as p01.ipynb, p02.ipynb
+---
 
-# Pre Requisites
+## ✨ Why use this?
 
-1. pandoc
-1. typst compiler
-1. jupyter labs
-1. zathura
+* Only **one person** needs to set up the formatting using Typst (a modern and simpler alternative to LaTeX, yet equally powerful).
+* Everyone else can focus purely on writing code in Jupyter notebooks.
+* The final output is **consistent, professional, and ready for submission**.
 
-# How to get started
+---
 
-## Ubuntu/Debain and related
-curl -sSL "https://raw.githubusercontent/something/mantejjosan/path/to/this/setup/script" | sh 
+## 📂 Convention
 
-## Arch 
-curl -sSL "https://raw.githubusercontent/something/mantejjosan/path/to/this/setup/script" | sh 
+To ensure proper ordering and processing:
+
+* Name your notebooks as:
+
+  * `p01.ipynb`
+  * `p02.ipynb`
+  * `p03.ipynb`
+  * and so on...
+
+---
+
+## ⚙️ Prerequisites
+
+The following tools are required:
+
+* Pandoc
+* Typst compiler
+* JupyterLab
+* Zathura (PDF viewer)
+
+---
+
+## 🚀 Getting Started
+
+### 🟦 Ubuntu / Debian (and derivatives)
+
+```bash
+curl -sSL https://raw.githubusercontent.com/mantejjosan/pracfile/main/debian_based_install.sh | bash
+```
+
+---
+
+### 🟩 Arch Linux
+
+```bash
+curl -sSL https://raw.githubusercontent.com/mantejjosan/pracfile/main/arch_based_install.sh | bash
+```
+
+---
+
+## 🧠 Workflow
+
+1. Write your practicals in Jupyter notebooks inside the `notebooks/` folder
+2. After completing your work, run:
+
+```bash
+cd workflow
+bash build.sh
+```
+
+3. Open the generated PDF:
+
+```bash
+zathura main.pdf
+```
