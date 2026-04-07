@@ -1,0 +1,33 @@
+=== Build started at Tue Apr  7 03:57:17 PM IST 2026 ===
+Converted p01.ipynb → obtained_files/p01.typ at Tue Apr  7 03:57:17 PM IST 2026
+  → Header injected into p01.typ
+Converted p02.ipynb → obtained_files/p02.typ at Tue Apr  7 03:57:17 PM IST 2026
+  → Header injected into p02.typ
+Converted p03.ipynb → obtained_files/p03.typ at Tue Apr  7 03:57:17 PM IST 2026
+  → Header injected into p03.typ
+Added #include "obtained_files/p01.typ" to main.typ
+Added #include "obtained_files/p02.typ" to main.typ
+Added #include "obtained_files/p03.typ" to main.typ
+=== Build complete at Tue Apr  7 03:57:17 PM IST 2026 ===
+=== Build started at Tue Apr  7 04:00:50 PM IST 2026 ===
+Converted p01.ipynb → obtained_files/p01.typ at Tue Apr  7 04:00:50 PM IST 2026
+  → Header injected into p01.typ
+Converted p02.ipynb → obtained_files/p02.typ at Tue Apr  7 04:00:50 PM IST 2026
+  → Header injected into p02.typ
+Converted p03.ipynb → obtained_files/p03.typ at Tue Apr  7 04:00:50 PM IST 2026
+  → Header injected into p03.typ
+Skipped p01.typ (already in main.typ)
+Skipped p02.typ (already in main.typ)
+Skipped p03.typ (already in main.typ)
+=== Build complete at Tue Apr  7 04:00:50 PM IST 2026 ===
+=== Build started at Tue Apr  7 04:13:51 PM IST 2026 ===
+Converted p01.ipynb → obtained_files/p01.typ at Tue Apr  7 04:13:51 PM IST 2026
+  → Header injected into p01.typ
+Converted p02.ipynb → obtained_files/p02.typ at Tue Apr  7 04:13:51 PM IST 2026
+  → Header injected into p02.typ
+Converted p03.ipynb → obtained_files/p03.typ at Tue Apr  7 04:13:51 PM IST 2026
+  → Header injected into p03.typ
+Skipped p01.typ (already in main.typ)
+Skipped p02.typ (already in main.typ)
+Skipped p03.typ (already in main.typ)
+=== Build complete at Tue Apr  7 04:13:51 PM IST 2026 ===
