@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # ── PATHS ────────────────────────────────────────────────────────────────────
-NOTEBOOKS=~/Desktop/College/sem4/ai/pracfile/notebooks
-WORKFLOW=~/Desktop/College/sem4/ai/pracfile/workflow
-OBTAINED=$WORKFLOW/obtained_files
-MAIN=$WORKFLOW/main.typ
-LOG=$WORKFLOW/build.log
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+WORKFLOW="$SCRIPT_DIR"
+ROOT_DIR="$(dirname "$WORKFLOW")"
+NOTEBOOKS="$ROOT_DIR/notebooks"
+OBTAINED="$WORKFLOW/obtained_files"
+MAIN="$WORKFLOW/main.typ"
+LOG="$WORKFLOW/build.log"
 # ── SETUP ────────────────────────────────────────────────────────────────────
 mkdir -p "$OBTAINED"
 ln -sfn "$NOTEBOOKS/images" "$OBTAINED/images"
