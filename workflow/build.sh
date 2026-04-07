@@ -80,23 +80,49 @@ TYPST_HEADER
     echo "  → Header injected into $basename.typ" | tee -a "$LOG"
 done
 
-# ── STEP 3: Add new includes to main.typ (no duplicates) ─────────────────────
+# ── STEP 3: Rebuild include section ─────────────────────────────────────────
+
+TMP_FILE=$(mktemp)
+
+# Copy everything BEFORE the include section
+awk '
+/\/\/ ── PRACTICAL INCLUDES START ──/ {print; exit}
+{print}
+' "$MAIN" > "$TMP_FILE"
+
+echo "" >> "$TMP_FILE"
+
+# Rebuild includes fresh
 for file in "$OBTAINED"/p*.typ; do
     [ -f "$file" ] || continue
 
-    basename=$(basename "$file")                 # e.g. p01.typ
-    include_path="obtained_files/$basename"
+    basename=$(basename "$file")
 
-    # Only add if this include line isn't already in main.typ
-    if ! grep -qF "$include_path" "$MAIN"; then
-        echo "" >> "$MAIN"
-        echo "#pagebreak()" >> "$MAIN"
-        echo "#include \"$include_path\"" >> "$MAIN"
-        echo "Added #include \"$include_path\" to main.typ" | tee -a "$LOG"
+    CUSTOM_FILE="$WORKFLOW/custom/$basename"
+    DEFAULT_PATH="obtained_files/$basename"
+    CUSTOM_PATH="custom/$basename"
+
+    if [ -f "$CUSTOM_FILE" ]; then
+        include_path="$CUSTOM_PATH"
+        echo "Using custom version for $basename" | tee -a "$LOG"
+
+        if ! diff -q "$CUSTOM_FILE" "$file" >/dev/null 2>&1; then
+            echo "⚠️  $basename differs from generated version" | tee -a "$LOG"
+        fi
     else
-        echo "Skipped $basename (already in main.typ)" | tee -a "$LOG"
+        include_path="$DEFAULT_PATH"
     fi
+
+    echo "#pagebreak()" >> "$TMP_FILE"
+    echo "#include \"$include_path\"" >> "$TMP_FILE"
+    echo "" >> "$TMP_FILE"
 done
+
+# Add end marker
+echo "// ── PRACTICAL INCLUDES END ──" >> "$TMP_FILE"
+
+# Replace main.typ
+mv "$TMP_FILE" "$MAIN"
 
 echo "=== Build complete at $(date) ===" | tee -a "$LOG"
 echo ""

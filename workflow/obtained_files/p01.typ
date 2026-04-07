@@ -40,8 +40,6 @@ accordingly --- either cleaning or moving to the other location.
 
 ] <5edf32dd-193d-4baa-9d91-e47ff5bb6609>
 #block[
-== Task Requirement
-<task-requirement>
 #figure(
   align(center)[#table(
     columns: (29.03%, 18.06%, 23.23%, 29.68%),
@@ -49,11 +47,11 @@ accordingly --- either cleaning or moving to the other location.
     table.header([Performance
       Measure], [Environment], [Actuators], [Sensors],),
     table.hline(),
-    [1. Energy efficiency (battery saved)], [A room or grid of
+    [Energy efficiency (battery saved)], [A room or grid of
     squares], [Suction pump, wheels, motor], [Dirt detector, location
     sensor, bump sensor],
-    [2. Time saved], [], [], [],
-    [3. Cleanliness (percent of space clean)], [], [], [],
+    [Time saved], [], [], [],
+    [Cleanliness (percent of space clean)], [], [], [],
   )]
   , kind: table
   )
@@ -107,11 +105,6 @@ solely on the current percept without any memory of past states. This
 demonstrates the basic structure of a condition-action rule-based agent.
 
 ] <7866de2d-6198-482c-86e6-240cf77e748e>
-#block[
-```python
-```
-
-] <f0c7637a-b645-4563-ba73-763a25b7237e>
 
 // ── SIGN ROW ─────────────────────────────────────────────────
 #v(1fr)

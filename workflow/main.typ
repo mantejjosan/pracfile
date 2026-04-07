@@ -95,7 +95,9 @@
 #include "obtained_files/p01.typ"
 
 #pagebreak()
-#include "obtained_files/p02.typ"
+#include "custom/p02.typ"
 
 #pagebreak()
 #include "obtained_files/p03.typ"
+
+// ── PRACTICAL INCLUDES END ──

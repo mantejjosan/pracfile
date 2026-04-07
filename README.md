@@ -72,3 +72,21 @@ bash build.sh
 ```bash
 zathura main.pdf
 ```
+
+## Manual Customization !!
+
+Go to `workflow` folder.
+
+### Rule 1: Never change anything inside `obtained_files` folder.
+
+These are auto generated files by `build.sh` script. If you change this, on the next run of build script your **changes will be overwritten.**
+
+### Rule 2: How to change. 
+
+Copy the files that you desire to change from `obtained_files` into `custom` folder. Then make any changes you want using typst. 
+
+For example to change only p02.typ. use:
+```
+cp obtained_files/p02.typ custom/
+```
+
