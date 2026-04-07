@@ -11,7 +11,7 @@
   "Implement a simple reflex agent for the vacuum-cleaner world.",
   "Implement BFS and DFS for water jug problem.",
   "Implement Hill Climbing search algorithm.",
-  "Implement A\* algorithm for eight puzzle problem.",
+  "Implement A* algorithm for eight puzzle problem.",
   "Develop Tic Tac Toe using Minimax with alpha-beta pruning.",
   "Represent a real-world domain using frames and semantic networks.",
   "Implement Goal Stack Planning for the Blocks World.",

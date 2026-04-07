@@ -132,17 +132,26 @@ college=${college:-$default_college}
 read -p "Professor [$default_prof]: " professor
 professor=${professor:-$default_prof}
 
-echo "=== Writing to variables.typ ==="
+echo "=== Updating variables.typ ==="
 
-cat > "$VARS_FILE" <<EOF
-#let student_name = "$student_name"
-#let roll_no      = "$roll_no"
-#let branch       = "$branch"
-#let year_div     = "$year_div"
-#let subject      = "$subject"
-#let college      = "$college"
-#let professor    = "$professor"
-EOF
+update_var() {
+    local key="$1"
+    local value="$2"
+
+    if grep -q "^#let $key" "$VARS_FILE"; then
+        sed -i "s|^#let $key.*|#let $key = \"$value\"|" "$VARS_FILE"
+    else
+        echo "#let $key = \"$value\"" >> "$VARS_FILE"
+    fi
+}
+
+update_var "student_name" "$student_name"
+update_var "roll_no" "$roll_no"
+update_var "branch" "$branch"
+update_var "year_div" "$year_div"
+update_var "subject" "$subject"
+update_var "college" "$college"
+update_var "professor" "$professor"
 
 # Launch Jupyter Lab
 echo ""
