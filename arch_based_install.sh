@@ -17,18 +17,24 @@ else
     echo "=== Installing Pandoc 3.9.0.2 ==="
     cd /tmp
 
-    curl -LO https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-1-amd64.deb
+    # curl -LO https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-1-amd64.deb
+    # Added by param
+    # curl -LO https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz
+
+    # This automatically finds the latest .tar.gz and downloads it
+    curl -s https://api.github.com/repos/jgm/pandoc/releases/latest | grep "browser_download_url" | grep "linux-amd64.tar.gz" | cut -d '"' -f 4 | xargs curl -L -o pandoc-linux-amd64.tar.gz
 
     # Extract .deb manually (Arch workaround)
-    ar x pandoc-3.9.0.2-1-amd64.deb
-    tar -xf data.tar.xz
+    # ar x pandoc-3.9.0.2-1-amd64.deb
+    mkdir -p usr
+    tar -xzf pandoc-linux-amd64.tar.gz -C usr --strip-components=1
 
     # Copy into system
-    sudo cp -r usr/* /usr/
+    # sudo cp -r usr/* /usr/
+    sudo cp usr/bin/* /usr/bin/; sudo cp -r usr/share/* /usr/share/
 
-    rm -rf pandoc-3.9.0.2-1-amd64.deb data.tar.* control.tar.*
+    rm -rf pandoc-linux-amd64.tar.gz
 fi
-
 
 # ── Typst ─────────────────────────────────────────────────
 if command -v typst >/dev/null 2>&1; then
@@ -36,25 +42,30 @@ if command -v typst >/dev/null 2>&1; then
 else
     echo "=== Installing Typst ==="
 
-    mkdir -p "$HOME/.local/typst"
-    cd "$HOME/.local/typst"
+    INSTALL_DIR="$HOME/.local/bin"
+    mkdir -p "$INSTALL_DIR"
 
-    curl -LO https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unknown-linux-musl.tar.xz
+    # Direct "latest" download link for Linux x86_64
+    # This URL is a GitHub shortcut that doesn't require the API
+    URL="https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz"
 
-    tar -xf typst-x86_64-unknown-linux-musl.tar.xz
+    echo "Downloading Typst..."
+    if curl -L -o "$HOME/typst.tar.xz" "$URL"; then
+        # Extract binary directly to your local bin
+        tar -xf "$HOME/typst.tar.xz" --strip-components=1 -C "$INSTALL_DIR"
+        rm "$HOME/typst.tar.xz"
+        chmod +x "$INSTALL_DIR/typst"
 
-    TYPST_DIR=$(find . -type d -name "typst-*")
-    mv "$TYPST_DIR/typst" .
+        # Ensure $HOME/.local/bin is in your PATH
+        if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+            export PATH="$HOME/.local/bin:$PATH"
+        fi
 
-    chmod +x typst
-
-    # Add to PATH
-    RC_FILE="$HOME/.profile"
-    if ! grep -q 'typst' "$RC_FILE"; then
-        echo 'export PATH="$HOME/.local/typst:$PATH"' >> "$RC_FILE"
+        echo "=== Installation Complete: $(typst --version) ==="
+    else
+        echo "Error: Download failed. Check your internet connection."
     fi
-
-    export PATH="$HOME/.local/typst:$PATH"
 fi
 
 
@@ -147,7 +158,7 @@ update_var "professor" "$professor"
 echo ""
 echo "======================================"
 echo "   LAUNCHING JUPYTER LAB IN 4...3...2...1"
-echo "   Your Project is in ~/pracfile/" 
+echo "   Your Project is in ~/pracfile/"
 echo "======================================"
 echo ""
 
